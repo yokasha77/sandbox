@@ -62,13 +62,11 @@ The app will run at:
 
 http://127.0.0.1:5000
 
+## Documentation Included
 
-Documentation Included
+Inside docs:
 
-Inside docs/:
+- [Full Word Report](docs/structure%20of%20programming%202.docx)
+- [PowerPoint Presentation](docs/structure.pptx)
 
-Full Word report
-/Users/yousraokasha/Downloads/language_sandbox/docs/structure of programming 2.docx
 
-PowerPoint presentation
-/Users/yousraokasha/Downloads/language_sandbox/docs/structure.pptx
