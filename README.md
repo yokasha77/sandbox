@@ -1,18 +1,74 @@
-# Language Learning Sandbox
+Language Learning Sandbox
 
-## Overview
-A simple Python GUI to learn programming concepts through exercises.
+A web-based interactive system that helps learners practice Python syntax and semantics through guided questions, feedback, and scoring.
 
-## How to Run
-1. Install Python 3.x
-2. Navigate to the project folder
-3. Run:
-   python main.py
+Features
 
-## Features
-- Multiple-choice / short-answer Python questions
-- Immediate feedback
-- Score tracking
+Practice Python syntax and semantics
 
-## Author(s)
-- Your team members
+Beginner and advanced levels
+
+Instant feedback
+
+Hints for each question
+
+Syntax and meaning checks
+
+Score tracking
+
+Clean and simple UI
+
+Flask backend + JavaScript frontend
+
+Project Structure
+language_sandbox/
+│
+├── app.py                 # Flask backend
+├── questions.py           # All questions, answers, explanations
+│
+├── static/
+│   ├── styles.css         # UI styling
+│   ├── script.js          # Frontend logic
+│
+├── templates/
+│   ├── index.html         # Home page
+│   ├── quiz.html          # Quiz interface
+│   ├── results.html       # Final score page
+│
+├── docs/
+│   ├── structure of programming 2.docx
+│   ├── structure.pptx
+│
+└── README.md
+
+How to Run the Project
+1. Install Python (3.9+ recommended)
+
+Check version:
+
+python3 --version
+
+2. Install Flask
+pip install flask
+
+3. Run the application
+
+Inside the project folder:
+
+python3 app.py
+
+
+The app will run at:
+
+http://127.0.0.1:5000
+
+
+Documentation Included
+
+Inside docs/:
+
+Full Word report
+/Users/yousraokasha/Downloads/language_sandbox/docs/structure of programming 2.docx
+
+PowerPoint presentation
+/Users/yousraokasha/Downloads/language_sandbox/docs/structure.pptx
