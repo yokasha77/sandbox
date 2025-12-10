@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Quiz Finished!</h1>
+        
+        <div class="results-summary">
+            <div class="result-card">
+                <div class="result-label">Final Score</div>
+                <div class="result-value" id="final-score">0 / 0</div>
+            </div>
+            
+            <div class="result-card">
+                <div class="result-label">Accuracy</div>
+                <div class="result-value" id="accuracy">0%</div>
+            </div>
+            
+            <div class="result-card">
+                <div class="result-label">Time Taken</div>
+                <div class="result-value" id="time-taken">0s</div>
+            </div>
+        </div>
+
+        <div id="wrong-answers-section" style="display: none;">
+            <h2>Questions You Got Wrong</h2>
+            <div id="wrong-answers-list" class="wrong-answers-list"></div>
+        </div>
+
+        <div class="results-actions">
+            <a href="/" class="level-btn beginner">Try Again</a>
+            <a href="/" class="level-btn advanced">Back to Home</a>
+        </div>
+    </div>
+
+    <script>
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            if (mins > 0) {
+                return `${mins}m ${secs}s`;
+            }
+            return `${secs}s`;
+        }
+
+        const results = JSON.parse(sessionStorage.getItem('quizResults'));
+        
+        if (results) {
+            document.getElementById('final-score').innerText = `${results.score} / ${results.total}`;
+            document.getElementById('accuracy').innerText = `${results.accuracy}%`;
+            document.getElementById('time-taken').innerText = formatTime(results.timeTaken);
+            
+            if (results.wrongAnswers.length > 0) {
+                const wrongAnswersSection = document.getElementById('wrong-answers-section');
+                const wrongAnswersList = document.getElementById('wrong-answers-list');
+                wrongAnswersSection.style.display = 'block';
+                
+                results.wrongAnswers.forEach((item, index) => {
+                    const div = document.createElement('div');
+                    div.className = 'wrong-answer-item';
+                    div.innerHTML = `
+                        <div class="wrong-answer-number">Question ${index + 1}</div>
+                        <div class="wrong-answer-question">${item.question}</div>
+                        <div class="wrong-answer-details">
+                            <p><strong>Your Answer:</strong> ${item.userAnswer}</p>
+                            <p><strong>Correct Answer:</strong> ${item.correctAnswer}</p>
+                            <p><strong>Explanation:</strong> ${item.explanation}</p>
+                        </div>
+                    `;
+                    wrongAnswersList.appendChild(div);
+                });
+            }
+        }
+    </script>
+</body>
+</html>

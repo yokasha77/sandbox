@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header-with-quit">
+            <h1>Quiz</h1>
+            <a href="/" class="quit-btn">Quit</a>
+        </div>
+
+        <div id="progress-container">
+            <div id="progress-bar"></div>
+        </div>
+
+        <div id="question-box">
+            <p id="question-text"></p>
+        </div>
+
+        <input type="text" id="answer" placeholder="Type your answer">
+        <div class="button-group">
+            <button onclick="submitAnswer()" class="submit-btn">Submit</button>
+            <button onclick="showHint()" class="hint-btn">💡 Hint</button>
+        </div>
+
+        <p id="question-counter">Question: [0/0]</p>
+        <div id="feedback"></div>
+        <p id="score-text">Score: 0</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Language Learning Sandbox</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Language Learning Sandbox</h1>
+        
+       <div class="welcome-summary">
+           <p>Welcome to the Language Learning Sandbox! This is a simple tool to learn programming concepts through interactive exercises. It features multiple-choice and short-answer Python questions, provides immediate feedback, and tracks your score to help you improve your skills.</p>
+        </div>
+
+        <div class="selection-section">
+            <h2>Select Level</h2>
+            <div class="level-selection">
+                <button class="level-filter-btn" onclick="setLevel('Beginner')">Beginner</button>
+                <button class="level-filter-btn" onclick="setLevel('Advanced')">Advanced</button>
+            </div>
+        </div>
+
+        <div class="selection-section">
+            <h2>Select Category</h2>
+            <div id="categories-container" class="categories-container"></div>
+        </div>
+    </div>
+
+    <script>
+        let selectedLevel = 'Beginner';
+        const categories = ['Functions', 'Strings', 'Basics', 'Loops', 'Data Structures', 'Operators', 'Modules', 'Error Handling'];
+
+        function setLevel(level) {
+            selectedLevel = level;
+            document.querySelectorAll('.level-filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function setCategory(category) {
+            window.location.href = `/quiz?level=${selectedLevel}&category=${category}`;
+        }
+
+        function initCategories() {
+            const container = document.getElementById('categories-container');
+            categories.forEach(cat => {
+                const btn = document.createElement('a');
+                btn.href = '#';
+                btn.className = 'category-btn';
+                btn.textContent = cat;
+                btn.onclick = (e) => {
+                    e.preventDefault();
+                    setCategory(cat);
+                };
+                container.appendChild(btn);
+            });
+            // Set default level button as active
+            document.querySelectorAll('.level-filter-btn')[0].classList.add('active');
+        }
+
+        initCategories();
+    </script>
+</body>
+</html>
