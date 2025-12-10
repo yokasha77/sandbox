@@ -16,7 +16,7 @@ questions = [
     {"question": "How do you check equality between a and b?", "answer": "a == b", "explanation": "Use '==' to compare values.", "level": "Beginner", "category": "Basics"},
     {"question": "What built-in function returns length of a string or list?", "answer": "len", "explanation": "Use len(obj) to get its length.", "level": "Beginner", "category": "Basics"},
     {"question": "How do you create an empty dictionary?", "answer": "{}", "explanation": "Use curly braces for dict literal.", "level": "Beginner", "category": "Data Structures"},
-    {"question": "Which operator performs floor division?", "answer": "//", "explanation": "'//' gives integer quotient.", "level": "Beginner", "category": "Operators"},
+    {"question": "Which operator is used to concatenate strings?", "answer": "+", "explanation": "'+' joins two strings together.", "level": "Beginner", "category": "Operators"},
     {"question": "What does '==' check?", "answer": "equality", "explanation": "'==' checks if two values are equal.", "level": "Beginner", "category": "Basics"},
     {"question": "How do you write a multi-line comment or docstring?", "answer": "triple quotes", "explanation": "Use triple quotes for multi-line docstrings.", "level": "Beginner", "category": "Basics"},
     {"question": "How do you import only the 'sqrt' function from math?", "answer": "from math import sqrt", "explanation": "Use 'from module import name'.", "level": "Beginner", "category": "Modules"},
@@ -62,3 +62,4 @@ questions = [
     {"question": "How do you convert a list of strings to integers?", "answer": "list(map(int, strs))", "explanation": "Use map or comprehension to convert items.", "level": "Advanced", "category": "Data Structures"},
     {"question": "What is duck typing?", "answer": "behavior-based typing", "explanation": "Type compatibility by behavior rather than explicit types.", "level": "Advanced", "category": "Basics"},
 ]
+
