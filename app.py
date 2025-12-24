@@ -14,9 +14,14 @@ def index():
 def quiz():
     return render_template("quiz.html")
 
+
 @app.route("/results")
 def results():
     return render_template("results.html")
+
+@app.route("/favorites")
+def favorites():
+    return render_template("favorites.html")
 
 @app.route("/get_questions/<level>")
 def get_questions(level):
