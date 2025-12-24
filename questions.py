@@ -60,8 +60,6 @@ questions = [
     {"question": "How do you handle missing dict keys with a default?", "answer": "dict.get(key, default)", "explanation": "get returns default when key missing.", "level": "Advanced", "category": "Data Structures"},
     {"question": "What is the purpose of __init__.py in packages?", "answer": "marks package", "explanation": "It indicates a Python package directory.", "level": "Advanced", "category": "Modules"},
     {"question": "How do you convert a list of strings to integers?", "answer": "list(map(int, strs))", "explanation": "Use map or comprehension to convert items.", "level": "Advanced", "category": "Data Structures"},
-      {"question": "How do you loop until a condition is met and break safely?", "answer": "while condition: break", "explanation": "Use break to exit the loop when the condition triggers.", "level": "Advanced", "category": "Loops"},
+    {"question": "How do you loop until a condition is met and break safely?", "answer": "while condition: break", "explanation": "Use break to exit the loop when the condition triggers.", "level": "Advanced", "category": "Loops"},
     {"question": "What is duck typing?", "answer": "behavior-based typing", "explanation": "Type compatibility by behavior rather than explicit types.", "level": "Advanced", "category": "Basics"},
 ]
-
-
