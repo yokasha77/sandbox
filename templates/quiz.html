@@ -16,14 +16,25 @@
             <div id="progress-bar"></div>
         </div>
 
+
         <div id="question-box">
             <p id="question-text"></p>
         </div>
 
-        <input type="text" id="answer" placeholder="Type your answer">
+        <!-- Multiple Choice Options -->
+        <div id="multiple-choice" style="display: none;">
+            <div id="options-container"></div>
+        </div>
+
+        <!-- Text Input (fallback) -->
+        <div id="text-input">
+            <input type="text" id="answer" placeholder="Type your answer">
+        </div>
+
         <div class="button-group">
             <button onclick="submitAnswer()" class="submit-btn">Submit</button>
             <button onclick="showHint()" class="hint-btn">💡 Hint</button>
+            <button onclick="toggleFavorite()" class="favorite-btn" id="favorite-btn">⭐</button>
         </div>
 
         <p id="question-counter">Question: [0/0]</p>
