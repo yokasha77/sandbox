@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Favorites - Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .favorites-list {
+            margin: 20px 0;
+            text-align: left;
+        }
+        .favorite-item {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        .favorite-question {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #FFD700;
+        }
+        .favorite-answer {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #4CAF50;
+        }
+        .favorite-explanation {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 10px;
+        }
+        .favorite-meta {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .empty-favorites {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-style: italic;
+            margin: 40px 0;
+        }
+        .remove-favorite-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        .remove-favorite-btn:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-with-quit">
+            <h1>⭐ Favorites</h1>
+            <a href="/" class="quit-btn">Home</a>
+        </div>
+
+        <div id="favorites-content">
+            <div class="favorites-list" id="favorites-list">
+                <!-- Favorites will be loaded here -->
+            </div>
+        </div>
+
+        <div class="results-actions">
+            <button onclick="clearAllFavorites()" class="hint-btn" id="clear-all-btn" style="display: none;">
+                Clear All Favorites
+            </button>
+            <button onclick="startPracticeQuiz()" class="submit-btn" id="practice-btn" style="display: none;">
+                Practice Quiz
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let favorites = [];
+
+        // Load favorites on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFavorites();
+        });
+
+        function loadFavorites() {
+            favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const favoritesList = document.getElementById('favorites-list');
+            const clearAllBtn = document.getElementById('clear-all-btn');
+            const practiceBtn = document.getElementById('practice-btn');
+
+            if (favorites.length === 0) {
+                favoritesList.innerHTML = '<div class="empty-favorites">No favorite questions yet! Star questions during quizzes to save them here.</div>';
+                clearAllBtn.style.display = 'none';
+                practiceBtn.style.display = 'none';
+                return;
+            }
+
+            // Show buttons
+            clearAllBtn.style.display = 'inline-block';
+            practiceBtn.style.display = 'inline-block';
+
+            // Group favorites by level and category
+            const groupedFavorites = favorites.reduce((acc, fav) => {
+                const key = `${fav.level}-${fav.category}`;
+                if (!acc[key]) acc[key] = [];
+                acc[key].push(fav);
+                return acc;
+            }, {});
+
+            let html = '';
+            Object.keys(groupedFavorites).forEach(key => {
+                const [level, category] = key.split('-');
+                html += `<h3 style="color: #FFD700; margin: 25px 0 15px 0; text-align: center;">${level} - ${category}</h3>`;
+                
+                groupedFavorites[key].forEach((fav, index) => {
+                    const globalIndex = favorites.indexOf(fav);
+                    html += `
+                        <div class="favorite-item">
+                            <div class="favorite-question">${fav.question}</div>
+                            <div class="favorite-answer"><strong>Answer:</strong> ${fav.answer}</div>
+                            <div class="favorite-explanation"><strong>Explanation:</strong> ${fav.explanation}</div>
+                            <div class="favorite-meta">Level: ${fav.level} | Category: ${fav.category}</div>
+                            <button class="remove-favorite-btn" onclick="removeFavorite(${globalIndex})">Remove from Favorites</button>
+                        </div>
+                    `;
+                });
+            });
+
+            favoritesList.innerHTML = html;
+        }
+
+        function removeFavorite(index) {
+            favorites.splice(index, 1);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            loadFavorites();
+        }
+
+        function clearAllFavorites() {
+            if (confirm('Are you sure you want to clear all favorites?')) {
+                favorites = [];
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                loadFavorites();
+            }
+        }
+
+        function startPracticeQuiz() {
+            if (favorites.length === 0) {
+                alert('No favorites to practice with!');
+                return;
+            }
+            
+            // For now, redirect to beginner quiz - in a full implementation, 
+            // you'd create a dedicated favorites quiz endpoint
+            const level = favorites[0].level || 'Beginner';
+            const category = favorites[0].category || '';
+            window.location.href = `/quiz?level=${level}&category=${category}`;
+        }
+    </script>
+</body>
+</html>
